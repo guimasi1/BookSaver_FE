@@ -5,7 +5,12 @@ export default {
     container: {
       center: true,
     },
-    extend: {},
+    extend: {
+      colors: {
+        midnight: "#1F2937",
+        grapefruit: "#F86B0A",
+      },
+    },
   },
   plugins: [],
 };

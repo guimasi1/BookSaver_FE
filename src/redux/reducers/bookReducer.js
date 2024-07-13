@@ -1,7 +1,8 @@
-import { GET_BOOKS } from "../actions/bookActions";
+import { GET_BOOKS, SET_BOOK_AS_READ } from "../actions/bookActions";
 
 const initialState = {
   books: [],
+  readBooks: [],
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -10,6 +11,14 @@ const bookReducer = (state = initialState, action) => {
       return {
         ...state,
         books: action.payload,
+      };
+    case SET_BOOK_AS_READ:
+      return {
+        ...state,
+        readBooks: [
+          ...state.readBooks,
+          state.books.find((book) => book._id === action.payload),
+        ],
       };
     default:
       return state;
