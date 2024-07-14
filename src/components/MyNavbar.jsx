@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
+
   const location = useLocation();
   const loggedIn = useSelector((state) => state.auth.loggedIn);
 
@@ -12,9 +13,21 @@ const MyNavbar = () => {
   const goToHome = () => {
     navigate("/");
   };
+  const goToReadBooks = () => {
+    navigate("/read-books");
+  };
+
+  const handleLogout = () => {
+    // dispatch(logout());
+    document.cookie = "token=; path=/;";
+    navigate("/");
+  };
+
   return (
     <nav className="container mx-0 font-bold flex justify-between text-lg mb-10 mt-0">
-      <div className="">BookSaver</div>
+      <div className="cursor-pointer" onClick={goToHome}>
+        BookSaver
+      </div>
       <div className="flex gap-2 justify-center">
         <div
           className={`cursor-pointer px-3 rounded-2xl py-1 ${
@@ -25,26 +38,40 @@ const MyNavbar = () => {
           Home
         </div>
         <div
+          onClick={goToReadBooks}
           className={`cursor-pointer px-3 rounded-2xl py-1 ${
-            location.pathname === "/saved-books" ? "bg-grapefruit" : ""
+            location.pathname === "/read-books" ? "bg-grapefruit" : ""
           }`}
         >
-          Saved books
+          Read books
         </div>
       </div>
       <div>
-        {!loggedIn && (
-          <div className={`cursor-pointer px-3 rounded-2xl py-1 `}>Logout</div>
-        )}
-        {loggedIn && (
+        {loggedIn ? (
+          <div
+            onClick={handleLogout}
+            className="cursor-pointer px-3 rounded-2xl py-1"
+          >
+            Logout
+          </div>
+        ) : (
           <div
             className={` cursor-pointer px-3 rounded-2xl py-1 ${
               location.pathname === "/login" ? "bg-grapefruit" : ""
             }`}
+            onClick={goToLogin}
           >
-            <div onClick={goToLogin}>Login</div>
+            Login
           </div>
         )}
+        <div
+          className={` cursor-pointer px-3 rounded-2xl py-1 ${
+            location.pathname === "/login" ? "bg-grapefruit" : ""
+          }`}
+          onClick={goToLogin}
+        >
+          Login
+        </div>
       </div>
     </nav>
   );

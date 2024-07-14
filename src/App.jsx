@@ -4,6 +4,7 @@ import Homepage from "./components/Homepage";
 import MyNavbar from "./components/MyNavbar";
 import Login from "./components/Login";
 import BookDetails from "./components/BookDetails";
+import SavedBooks from "./components/SavedBooks";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/books/:bookId" element={<BookDetails />} />
+          <Route path="/read-books" element={<SavedBooks />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BASE_URL } from "../redux/actions/authActions";
 import { booksURI } from "../redux/actions/bookActions";
 import { useEffect, useState } from "react";
+import ReviewItem from "./elements/ReviewItem";
 
 const BookDetails = () => {
   const params = useParams();
@@ -29,7 +30,16 @@ const BookDetails = () => {
       {book && (
         <div>
           <h1 className="text-4xl font-bold">{book.title}</h1>
-          <div className="mt-10 text-left">{book.description}</div>
+          <h2 className="text-2xl font-semibold mt-4">
+            {book.author.firstname} {book.author.lastname}
+          </h2>
+          <div className="mt-20 text-left">{book.description}</div>
+          <div className="mt-20 flex flex-col">
+            {book.reviews &&
+              book.reviews.map((review) => (
+                <ReviewItem review={review} key={review._id} />
+              ))}
+          </div>
         </div>
       )}{" "}
     </div>
