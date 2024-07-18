@@ -9,12 +9,13 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    const role = await dispatch(login({ email, password }));
     setEmail("");
     setPassword("");
-    navigate("/");
+    console.log(role);
+    role === "ADMIN" ? navigate("/admin-dashboard") : navigate("/");
   };
 
   return (

@@ -8,6 +8,10 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   const books = useSelector((state) => state.books.books);
+  const readBooks = useSelector((state) => state.books.readBooks).map(
+    (book) => book._id
+  );
+
   const [searchTitle, setSearchTitle] = useState();
 
   useEffect(() => {
@@ -17,11 +21,11 @@ const Homepage = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(getBooks(searchTitle));
-    }, 300);
+    }, 700);
   }, [searchTitle]);
 
   return (
-    <div className="container">
+    <div className="container px-4">
       <h1 className="font-bold text-4xl mb-12">BookSaver</h1>
       <div className="">
         <label htmlFor="search-books" className="mt-3 me-2">
@@ -37,7 +41,10 @@ const Homepage = () => {
         />
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3 mt-10">
-        {books && books.map((book) => <BookCard book={book} key={book._id} />)}
+        {books &&
+          books
+            .map((book) => <BookCard book={book} key={book._id} />)
+            .filter((book) => !readBooks.includes(book._id))}
       </div>
     </div>
   );

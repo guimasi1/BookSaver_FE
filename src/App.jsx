@@ -5,6 +5,7 @@ import MyNavbar from "./components/MyNavbar";
 import Login from "./components/Login";
 import BookDetails from "./components/BookDetails";
 import SavedBooks from "./components/SavedBooks";
+import AdminDashboard from "./components/admin/AdminDashboard";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/books/:bookId" element={<BookDetails />} />
           <Route path="/read-books" element={<SavedBooks />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
     </>

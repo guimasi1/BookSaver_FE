@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 const SavedBooks = () => {
   const user = useSelector((state) => state.users.currentUser);
+  const readBooks = useSelector((state) => state.books.readBooks);
 
   return (
     <div className="container">
@@ -13,8 +14,8 @@ const SavedBooks = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-        {user?.readBooks.map((book) => (
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {readBooks.map((book) => (
           <ReadBookCard key={book._id} book={book} />
         ))}
       </div>

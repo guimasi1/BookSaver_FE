@@ -23,7 +23,8 @@ export const login = (data) => {
         payload: result.token,
       });
       Cookies.set("token", result.token);
-      dispatch(getCurrentUser());
+      const user = await dispatch(getCurrentUser());
+      return user.role;
     } catch (err) {
       console.log(err);
     }
